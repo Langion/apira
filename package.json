@@ -1,5 +1,5 @@
 {
-  "name": "apira",
+  "name": "@langion/apira",
   "version": "1.0.0",
   "description": "API strict type definition creator",
   "homepage": "https://github.com/Langion/apira#readme",
