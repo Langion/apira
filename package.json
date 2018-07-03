@@ -1,6 +1,6 @@
 {
   "name": "@langion/apira",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "API strict type definition creator",
   "homepage": "https://github.com/Langion/apira#readme",
   "bugs": {
@@ -23,6 +23,6 @@
   },
   "devDependencies": {
     "ts-lint": "^4.5.1",
-    "typescript": "^2.8.3"
+    "typescript": "^2.9.2"
   }
 }
