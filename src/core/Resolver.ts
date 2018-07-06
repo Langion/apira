@@ -53,6 +53,11 @@ export abstract class Resolver<Aux> {
 
     protected getVariable<Query>(key: string, query: Query) {
         const value = (query as any)[key];
+
+        if (!value && value !== false) {
+            return "";
+        }
+
         const variable = `${key}=${value}`;
         return variable;
     }
