@@ -1,4 +1,4 @@
-export type RequestMethods = "get" | "post" | "put" | "delete";
+export type RequestMethods = "get" | "post" | "put" | "delete" | "patch" | "options" | "head" | "trace" | "connect";
 
 export type ParamfulPath<Params> = (params: Params) => string;
 
