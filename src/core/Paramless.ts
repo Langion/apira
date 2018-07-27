@@ -7,7 +7,7 @@ export class Paramless<Methods, Aux> extends MethodsCreator<Methods> {
         super();
     }
 
-    public request<Response, Query, Payload>(method: types.RequestMethods) {
+    public request<Response, Query, Payload>(method: types.RequestMethod) {
         const endpoint = (this as any) as Paramless<
             types.Method<types.ParamlessRequest<Query, Payload>, Response, Aux>,
             Aux

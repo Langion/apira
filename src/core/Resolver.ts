@@ -10,7 +10,7 @@ export abstract class Resolver<Aux> {
     public send<Response, Query, Payload, Params>(
         request: types.ParamlessRequest<Query, Payload>,
         path: string,
-        method: types.RequestMethods,
+        method: types.RequestMethod,
         auxiliary?: Aux,
         getPath?: types.ParamfulPath<Params>,
     ) {

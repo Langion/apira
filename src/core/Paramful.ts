@@ -7,7 +7,7 @@ export class Paramful<Params, Methods, Aux> extends MethodsCreator<Methods> {
         super();
     }
 
-    public request<Response, Query, Payload>(method: types.RequestMethods) {
+    public request<Response, Query, Payload>(method: types.RequestMethod) {
         const endpoint = (this as any) as Paramful<
             Params,
             types.Method<types.ParamfulRequest<Query, Payload, Params>, Response, Aux>,
