@@ -58,7 +58,7 @@ export abstract class Resolver<Aux> {
             return "";
         }
 
-        const variable = `${key}=${value}`;
+        const variable = `${key}=${encodeURI(value)}`;
         return variable;
     }
 }
