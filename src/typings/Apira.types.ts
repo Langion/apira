@@ -2,7 +2,15 @@ export type RequestMethod = "get" | "post" | "put" | "delete" | "patch" | "optio
 
 export type ParamfulPath<Params> = (params: Params) => string;
 
-export type Method<Request, Response, Aux> = (request: Request, auxiliary?: Aux) => Promise<Response>;
+export interface PureResponse<Response, Data> {
+    response: Response;
+    data: Data;
+}
+
+export interface Method<Request, Response, Aux, Data> {
+    (request: Request, auxiliary?: Aux): Promise<Response>;
+    pure(request: Request, auxiliary?: Aux): Promise<PureResponse<Response, Data>>;
+}
 
 export interface UrlParts<Query> {
     path: string;
@@ -24,4 +32,9 @@ export interface RequestData<Query, Payload, Params, Aux> {
     method: RequestMethod;
     getPath?: ParamfulPath<Params>;
     auxiliary?: Aux;
+}
+
+export interface ResponseData<Response, Data> {
+    response: Response;
+    data: Data;
 }

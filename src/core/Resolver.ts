@@ -1,13 +1,27 @@
 import * as types from "../typings";
 
-export abstract class Resolver<Aux> {
+export abstract class Resolver<Aux, Data> {
     protected abstract basePath: string;
 
-    protected abstract request: <Response, Query, Payload, Params>(
-        data: types.RequestData<Query, Payload, Params, Aux>
-    ) => Promise<Response>;
+    public abstract request<Response, Query, Payload, Params>(
+        data: types.RequestData<Query, Payload, Params, Aux>,
+    ): Promise<types.ResponseData<Response, Data>>;
 
     public send<Response, Query, Payload, Params>(
+        request: types.ParamlessRequest<Query, Payload>,
+        path: string,
+        method: types.RequestMethod,
+        auxiliary?: Aux,
+        getPath?: types.ParamfulPath<Params>,
+    ) {
+        const promise = this.pure<Response, Query, Payload, Params>(request, path, method, auxiliary, getPath).then(
+            (v) => v.response,
+        );
+
+        return promise;
+    }
+
+    public pure<Response, Query, Payload, Params>(
         request: types.ParamlessRequest<Query, Payload>,
         path: string,
         method: types.RequestMethod,
