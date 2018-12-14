@@ -12,6 +12,15 @@ export interface Method<Request, Response, Aux, Data> {
     pure(request: Request, auxiliary?: Aux): Promise<PureResponse<Response, Data>>;
 }
 
+export interface ParamlessMethod<Request, Response, Aux, Data, Query> extends Method<Request, Response, Aux, Data> {
+    createPath: (query?: Query) => string;
+}
+
+export interface ParamfulMethod<Request, Response, Aux, Data, Params, Query>
+    extends Method<Request, Response, Aux, Data> {
+    createPath: (params: Params, query?: Query) => string;
+}
+
 export interface UrlParts<Query> {
     path: string;
     query?: Query | null;

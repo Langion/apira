@@ -47,7 +47,7 @@ export abstract class Resolver<Aux, Data> {
         return promise;
     }
 
-    protected createUrl<Query>(parts: types.UrlParts<Query>) {
+    public createUrl<Query>(parts: types.UrlParts<Query>) {
         const query = this.createQuery(parts);
         const path = parts.path || "";
         const url = `${this.basePath}${path}${query}`;

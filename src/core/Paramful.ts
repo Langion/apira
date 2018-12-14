@@ -10,7 +10,7 @@ export class Paramful<Params, Methods, Aux, Data> extends MethodsCreator<Methods
     public request<Response, Query, Payload>(method: types.RequestMethod) {
         const endpoint = (this as any) as Paramful<
             Params,
-            types.Method<types.ParamfulRequest<Query, Payload, Params>, Response, Aux, Data>,
+            types.ParamfulMethod<types.ParamfulRequest<Query, Payload, Params>, Response, Aux, Data, Params, Query>,
             Aux,
             Data
         >;
@@ -29,6 +29,13 @@ export class Paramful<Params, Methods, Aux, Data> extends MethodsCreator<Methods
 
             return promise;
         }) as typeof endpoint.method;
+
+        endpoint.method.createPath = (params, query) => {
+            const resolver = Apira.getResolver(this.apira);
+            const path = this.getPath(params);
+            const result = resolver.createUrl({ path, query });
+            return result;
+        };
 
         endpoint.method.pure = (request, auxiliary) => {
             const resolver = Apira.getResolver(this.apira);

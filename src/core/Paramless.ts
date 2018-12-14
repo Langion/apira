@@ -9,7 +9,7 @@ export class Paramless<Methods, Aux, Data> extends MethodsCreator<Methods> {
 
     public request<Response, Query, Payload>(method: types.RequestMethod) {
         const endpoint = (this as any) as Paramless<
-            types.Method<types.ParamlessRequest<Query, Payload>, Response, Aux, Data>,
+            types.ParamlessMethod<types.ParamlessRequest<Query, Payload>, Response, Aux, Data, Query>,
             Aux,
             Data
         >;
@@ -20,6 +20,12 @@ export class Paramless<Methods, Aux, Data> extends MethodsCreator<Methods> {
 
             return promise;
         }) as typeof endpoint.method;
+
+        endpoint.method.createPath = (query) => {
+            const resolver = Apira.getResolver(this.apira);
+            const result = resolver.createUrl({ path: this.path, query });
+            return result;
+        };
 
         endpoint.method.pure = (request, auxiliary) => {
             const resolver = Apira.getResolver(this.apira);
