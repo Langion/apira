@@ -72,7 +72,7 @@ export abstract class Resolver<Aux, Data> {
             return "";
         }
 
-        const variable = `${key}=${encodeURI(value)}`;
+        const variable = `${key}=${encodeURIComponent(value)}`;
         return variable;
     }
 }
